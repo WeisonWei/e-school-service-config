@@ -1,0 +1,36 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+    shutdown:
+      enabled: true
+
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    health-check-url-path: /actuator/health
+  client:
+    registry-fetch-interval-seconds: 5
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      #defaultZone: http://node1:18761/eureka,http://node2:18762/eureka,http://node3:18763/eureka
+      defaultZone: http://localhost:8761/eureka
+
+spring:
+  cloud:
+    config:
+      label: master
+      server:
+        git:
+          uri: https://github.com/WeisonWei/service-config.git
+          username:
+          password:
+          search-paths: /
+    #inetutils:
+      #ignored-interfaces: ^io,^vbox,^utun,^ll,^aw,^p2p,^bridge
+      #preferred-networks: 10.10,10.10
